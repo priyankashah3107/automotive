@@ -13,9 +13,11 @@ import SellToUs from "@/components/SellToUs";
 import WhyChooseUs from "@/components/WhyChooseUs";
 import React from "react";
 import { getSession } from "@/lib/auth";
+import { cookies } from "next/headers";
 
 const page = async () => {
-  const session = await getSession();
+  const sessionCookie = (await cookies()).get("session")?.value;
+  const session = await getSession(sessionCookie);
   return (
     <>
       <Navbar session={session} />

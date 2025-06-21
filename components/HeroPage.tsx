@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import bg from "@/public/home.png";
 import { Car, Search, CarFront, CircleDot, Truck, Sprout } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 const tabs = ["All", "New", "Used"];
 
@@ -35,6 +36,7 @@ const priceRanges = [
 ];
 
 const HeroPage = () => {
+  const router = useRouter();
   const [selectedTab, setSelectedTab] = useState("All");
   const [selectedMake, setSelectedMake] = useState("Any Makes");
   const [selectedModel, setSelectedModel] = useState("Any Models");
@@ -49,15 +51,13 @@ const HeroPage = () => {
   };
 
   const handleSearch = () => {
-    // In a real app, you would use these values to filter results
-    // For example, by navigating to a search results page:
-    // router.push(`/search?type=${selectedTab}&make=${selectedMake}...`);
-    console.log("Searching with:", {
-      type: selectedTab,
-      make: selectedMake,
-      model: selectedModel,
-      price: selectedPrice,
-    });
+    const params = new URLSearchParams();
+    if (selectedTab !== "All") params.set("type", selectedTab);
+    if (selectedMake !== "Any Makes") params.set("make", selectedMake);
+    if (selectedModel !== "Any Models") params.set("model", selectedModel);
+    if (selectedPrice !== "All Prices") params.set("price", selectedPrice);
+
+    router.push(`/search?${params.toString()}`);
   };
 
   return (
