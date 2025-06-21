@@ -12,11 +12,13 @@ import PremiumBrands from "@/components/PremiumBrands";
 import SellToUs from "@/components/SellToUs";
 import WhyChooseUs from "@/components/WhyChooseUs";
 import React from "react";
+import { getSession } from "@/lib/auth";
 
-const page = () => {
+const page = async () => {
+  const session = await getSession();
   return (
     <>
-      <Navbar />
+      <Navbar session={session} />
       <HeroPage />
       <PremiumBrands />
       <AllVehicles />

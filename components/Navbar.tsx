@@ -43,8 +43,14 @@ const navItems: NavItem[] = [
   { label: "Contact", href: "/" },
 ];
 
-const Navbar: React.FC = () => {
+const Navbar: React.FC<{ session: any }> = ({ session }) => {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const user = session?.user;
+
+  const handleLogout = async () => {
+    await fetch("/api/logout", { method: "POST" });
+    window.location.reload();
+  };
 
   return (
     <header className="bg-gradient-to-b from-black/60 to-transparent backdrop-blur-sm text-white py-4 px-6 w-full fixed top-0 z-50">
@@ -79,16 +85,29 @@ const Navbar: React.FC = () => {
             </div>
           ))}
 
-          <Link
-            href="/signup"
-            className="flex items-center gap-1 hover:opacity-80"
-          >
-            <User size={16} />
-            Sign in
-          </Link>
+          {user ? (
+            <div className="flex items-center gap-4">
+              <span>{user.email}</span>
+              <button
+                onClick={handleLogout}
+                className="hover:opacity-80 flex items-center gap-1 cursor-pointer"
+              >
+                Logout
+              </button>
+            </div>
+          ) : (
+            <Link
+              href="/login"
+              className="flex items-center gap-1 hover:opacity-80"
+            >
+              <User size={16} />
+              Sign in
+            </Link>
+          )}
 
           <Link
-            href="/submit"
+            // href="/submit"
+            href="/#"
             className="bg-white text-black px-4 py-2 rounded-full hover:bg-gray-200 transition"
           >
             Submit Listing
@@ -129,9 +148,22 @@ const Navbar: React.FC = () => {
             </div>
           ))}
 
-          <Link href="/signup" className="block font-medium text-blue-600">
-            Sign in
-          </Link>
+          {user ? (
+            <div className="space-y-4">
+              <p className="font-medium">{user.email}</p>
+              <button
+                onClick={handleLogout}
+                className="block font-medium text-red-600"
+              >
+                Logout
+              </button>
+            </div>
+          ) : (
+            <Link href="/login" className="block font-medium text-blue-600">
+              Sign in
+            </Link>
+          )}
+
           <Link
             href="/submit"
             className="block bg-black text-white text-center py-2 rounded-full"

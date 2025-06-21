@@ -1,6 +1,7 @@
 // app/api/login/route.ts
 import { NextRequest, NextResponse } from "next/server";
-import { findUserByEmail, verifyPassword, createToken } from "@/lib/user";
+import { findUserByEmail, verifyPassword } from "@/lib/user";
+import { login } from "@/lib/auth";
 
 export async function POST(req: NextRequest) {
   const { email, password } = await req.json();
@@ -28,6 +29,7 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  const token = createToken(email);
-  return NextResponse.json({ token });
+  await login({ email });
+  
+  return NextResponse.json({ success: true, email });
 }

@@ -1,10 +1,10 @@
 // app/api/signup/route.ts
 import { NextRequest, NextResponse } from "next/server";
 import { createUser, findUserByEmail } from "@/lib/user";
+import { login } from "@/lib/auth";
 
 export async function POST(req: NextRequest) {
   const { email, password } = await req.json();
-  console.log("enmail, password", email, password);
 
   if (!email || !password) {
     return NextResponse.json(
@@ -21,6 +21,8 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  const user = await createUser(email, password);
-  return NextResponse.json({ user });
+  await createUser(email, password);
+  await login({ email });
+
+  return NextResponse.json({ success: true, email });
 }

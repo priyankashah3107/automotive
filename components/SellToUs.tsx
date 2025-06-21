@@ -1,9 +1,10 @@
-'use client';
+"use client";
 
 import Image from "next/image";
 import { PlayCircle, CheckCircle2 } from "lucide-react";
 import React from "react";
 import car from "@/public/why/car.webp"; // Replace with actual image path
+import Link from "next/link";
 
 const features = [
   "We are the UK’s largest provider, with more patrols in more places",
@@ -50,7 +51,10 @@ const SellToUs = () => {
             ))}
           </ul>
 
-          <button className="mt-4 inline-flex items-center bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg text-sm font-medium transition">
+          <Link
+            href={"/inquiry"}
+            className="mt-4 inline-flex items-center bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg text-sm font-medium transition"
+          >
             Get Started
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -59,9 +63,14 @@ const SellToUs = () => {
               viewBox="0 0 24 24"
               stroke="currentColor"
             >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M17 8l4 4m0 0l-4 4m4-4H3"
+              />
             </svg>
-          </button>
+          </Link>
         </div>
       </div>
     </section>

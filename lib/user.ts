@@ -1,46 +1,56 @@
-// lib/db/user.ts
-import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
+import mongoose, { Document, Model } from "mongoose";
+import bcrypt from "bcryptjs";
+import dbConnect from "./db";
 
-export type User = { email: string; passwordHash: string };
-const users: User[] = [];
+// 1. Create an interface representing a document in MongoDB.
+export interface IUser extends Document {
+  email: string;
+  password?: string; // Make password optional as it won't be returned in every query
+}
+
+const UserSchema = new mongoose.Schema<IUser>({
+  email: {
+    type: String,
+    required: [true, "Please provide an email."],
+    unique: true,
+    match: [/.+\@.+\..+/, "Please provide a valid email address."],
+  },
+  password: {
+    type: String,
+    required: [true, "Please provide a password."],
+    minlength: [6, "Password should be at least 6 characters long."],
+    select: false, // so that password is not returned by default
+  },
+});
+
+UserSchema.pre<IUser>("save", async function (next) {
+  if (!this.isModified("password")) {
+    return next();
+  }
+  const salt = await bcrypt.genSalt(10);
+  if (this.password) {
+    this.password = await bcrypt.hash(this.password, salt);
+  }
+  next();
+});
+
+export const User: Model<IUser> = mongoose.models.User || mongoose.model<IUser>("User", UserSchema);
 
 export async function createUser(email: string, password: string) {
-  const hash = await bcrypt.hash(password, 10);
-  users.push({ email, passwordHash: hash });
-  return { email };
+  await dbConnect();
+  const user = await User.create({ email, password });
+  return { email: user.email };
 }
 
 export async function findUserByEmail(email: string) {
-  return users.find((u) => u.email === email);
-}
-
-export function createToken(email: string) {
-  const secret = process.env.JWT_SECRET;
-  console.log("Secert is ", secret);
-  if (!secret) {
-    throw new Error("JWT_SECRET environment variable is not defined");
+  await dbConnect();
+  const user = await User.findOne({ email }).select("+password").lean<IUser>();
+  if (user) {
+    return { email: user.email, passwordHash: user.password as string };
   }
-  return jwt.sign({ email }, secret, { expiresIn: "2h" });
-}
-
-export function verifyToken(token: string) {
-  const secret = process.env.JWT_SECRET;
-  if (!secret) {
-    throw new Error("JWT_SECRET environment variable is not defined");
-  }
-  try {
-    const decoded = jwt.verify(token, secret);
-    type JwtPayload = { email: string; [key: string]: unknown };
-    if (typeof decoded === "object" && decoded !== null && "email" in decoded && typeof (decoded as JwtPayload).email === "string") {
-      return { email: (decoded as JwtPayload).email };
-    }
-    return null;
-  } catch {
-    return null;
-  }
+  return null;
 }
 
 export async function verifyPassword(password: string, hash: string) {
   return bcrypt.compare(password, hash);
-}
+} 

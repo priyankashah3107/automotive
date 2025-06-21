@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import toast from "react-hot-toast";
+import Image from "next/image";
 
 export const InquiryFormPage = () => {
   const [form, setForm] = useState({
@@ -20,6 +21,7 @@ export const InquiryFormPage = () => {
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const isValidEmail = (email: string) =>
     /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -51,27 +53,56 @@ export const InquiryFormPage = () => {
     setIsSubmitting(true);
 
     try {
-      await new Promise((resolve) => setTimeout(resolve, 2000));
-      toast.success("Inquiry submitted successfully!");
-      setForm({
-        firstName: "",
-        lastName: "",
-        phone: "",
-        email: "",
-        message: "",
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(form),
       });
-      setTouched({
-        firstName: false,
-        phone: false,
-        email: false,
-        message: false,
-      });
-    } catch {
-      toast.error("Something went wrong. Please try again.");
+
+      if (!response.ok) {
+        throw new Error('Server responded with an error');
+      }
+
+      const result = await response.json();
+
+      if (result.success) {
+        setIsSubmitted(true);
+      } else {
+        throw new Error(result.error || "Something went wrong");
+      }
+    } catch (error) {
+      toast.error(
+        error instanceof Error
+          ? error.message
+          : "Something went wrong. Please try again."
+      );
     } finally {
       setIsSubmitting(false);
     }
   };
+
+  if (isSubmitted) {
+    return (
+      <div className="bg-[#f5f6fa] py-12 px-4 sm:px-6 lg:px-8 min-h-screen flex items-center justify-center">
+        <div className="p-6 max-w-md text-center bg-white rounded-2xl shadow-lg">
+          <h1 className="text-2xl font-bold mb-4">Thank you!</h1>
+          <Image
+            src="/image.png"
+            alt="Application Submitted"
+            width={200}
+            height={200}
+            className="mx-auto mb-4"
+          />
+          <p className="text-gray-600">
+            Thank you for submitting your task - we appreciate your effort and
+            will review it soon!
+          </p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="bg-[#f5f6fa] py-12 px-4 sm:px-6 lg:px-8 min-h-screen">

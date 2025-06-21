@@ -265,14 +265,14 @@ const AllVehicles = () => {
           <button
             onClick={handlePrev}
             disabled={startIndex === 0}
-            className="w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-700 bg-gray-600  cursor-pointer"
+            className="w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center bg-gray-200 cursor-pointer"
           >
             <ChevronLeft size={18} />
           </button>
           <button
             onClick={handleNext}
             disabled={startIndex + cardsToShow >= vehicles.length}
-            className="w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-700 bg-gray-600 cursor-pointer"
+            className="w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center bg-gray-200 cursor-pointer"
           >
             <ChevronRight size={18} />
           </button>
