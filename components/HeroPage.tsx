@@ -15,8 +15,50 @@ const categories = [
   { icon: <Sprout size={18} />, label: "Hybrid" },
 ];
 
+const makes = ["Audi", "BMW", "Ford", "Mercedes", "Peugeot", "Volkswagen"];
+
+const modelsByMake: { [key: string]: string[] } = {
+  Audi: ["A3", "A4", "Q5", "Q7"],
+  BMW: ["3 Series", "5 Series", "X3", "X5"],
+  Ford: ["Fiesta", "Focus", "Mustang", "Explorer"],
+  Mercedes: ["C-Class", "E-Class", "GLC", "GLE"],
+  Peugeot: ["208", "308", "2008", "3008"],
+  Volkswagen: ["Golf", "Passat", "Tiguan", "Polo"],
+};
+
+const priceRanges = [
+  { value: "0-10000", label: "Under $10,000" },
+  { value: "10000-20000", label: "$10,000 - $20,000" },
+  { value: "20000-30000", label: "$20,000 - $30,000" },
+  { value: "30000-50000", label: "$30,000 - $50,000" },
+  { value: "50000-999999", label: "Over $50,000" },
+];
+
 const HeroPage = () => {
   const [selectedTab, setSelectedTab] = useState("All");
+  const [selectedMake, setSelectedMake] = useState("Any Makes");
+  const [selectedModel, setSelectedModel] = useState("Any Models");
+  const [selectedPrice, setSelectedPrice] = useState("All Prices");
+  const [availableModels, setAvailableModels] = useState<string[]>([]);
+
+  const handleMakeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const make = e.target.value;
+    setSelectedMake(make);
+    setSelectedModel("Any Models");
+    setAvailableModels(modelsByMake[make] || []);
+  };
+
+  const handleSearch = () => {
+    // In a real app, you would use these values to filter results
+    // For example, by navigating to a search results page:
+    // router.push(`/search?type=${selectedTab}&make=${selectedMake}...`);
+    console.log("Searching with:", {
+      type: selectedTab,
+      make: selectedMake,
+      model: selectedModel,
+      price: selectedPrice,
+    });
+  };
 
   return (
     <section className="relative h-screen w-full">
@@ -55,16 +97,47 @@ const HeroPage = () => {
 
         {/* Filters */}
         <div className="bg-white rounded-3xl shadow-lg w-full max-w-5xl px-4 sm:px-6 py-4 flex flex-col gap-4 md:flex-row md:items-center md:justify-between mb-8">
-          <select className="bg-transparent outline-none text-sm w-full md:w-auto px-3 py-2 border border-gray-200 rounded-md">
+          <select
+            value={selectedMake}
+            onChange={handleMakeChange}
+            className="bg-transparent outline-none text-sm w-full md:w-auto px-3 py-2 border border-gray-200 rounded-md"
+          >
             <option>Any Makes</option>
+            {makes.map((make) => (
+              <option key={make} value={make}>
+                {make}
+              </option>
+            ))}
           </select>
-          <select className="bg-transparent outline-none text-sm w-full md:w-auto px-3 py-2 border border-gray-200 rounded-md">
+          <select
+            value={selectedModel}
+            onChange={(e) => setSelectedModel(e.target.value)}
+            disabled={!availableModels.length}
+            className="bg-transparent outline-none text-sm w-full md:w-auto px-3 py-2 border border-gray-200 rounded-md"
+          >
             <option>Any Models</option>
+            {availableModels.map((model) => (
+              <option key={model} value={model}>
+                {model}
+              </option>
+            ))}
           </select>
-          <select className="bg-transparent outline-none text-sm w-full md:w-auto px-3 py-2 border border-gray-200 rounded-md">
+          <select
+            value={selectedPrice}
+            onChange={(e) => setSelectedPrice(e.target.value)}
+            className="bg-transparent outline-none text-sm w-full md:w-auto px-3 py-2 border border-gray-200 rounded-md"
+          >
             <option>All Prices</option>
+            {priceRanges.map((range) => (
+              <option key={range.value} value={range.value}>
+                {range.label}
+              </option>
+            ))}
           </select>
-          <button className="bg-indigo-600 hover:bg-indigo-700 text-white text-sm px-6 py-2 rounded-full flex items-center justify-center gap-2 transition w-full md:w-auto">
+          <button
+            onClick={handleSearch}
+            className="bg-indigo-600 hover:bg-indigo-700 text-white text-sm px-6 py-2 rounded-full flex items-center justify-center gap-2 transition w-full md:w-auto"
+          >
             <Search size={16} />
             Search Cars
           </button>
