@@ -14,6 +14,8 @@ pnpm dev
 bun dev
 ```
 
+demo [https://www.loom.com/share/a57107eea0974fc783322b02ccde9806](https://www.loom.com/share/a57107eea0974fc783322b02ccde9806) see demo
+
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
@@ -31,6 +33,24 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 
 ## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The easiest way to deploy your Next.js app is to use th# BOXCARS
+
+This is a [Next.js](https://nextjs.org) project for automotive listings, bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+
+## Demo
+
+[Loom Demo Video](https://www.loom.com/) <!-- Replace with your actual Loom video link -->
+
+![Homepage Screenshot](./readme/homepage.png)
+![Login Screenshot](./readme/login.png)
+<!-- Add more images as needed -->
+
+## Getting Started
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/yourusername/your-repo.git
+cd your-repoe [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.

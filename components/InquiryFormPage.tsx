@@ -53,16 +53,16 @@ export const InquiryFormPage = () => {
     setIsSubmitting(true);
 
     try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
+      const response = await fetch("/api/contact", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(form),
       });
 
       if (!response.ok) {
-        throw new Error('Server responded with an error');
+        throw new Error("Server responded with an error");
       }
 
       const result = await response.json();
@@ -96,8 +96,8 @@ export const InquiryFormPage = () => {
             className="mx-auto mb-4"
           />
           <p className="text-gray-600">
-            Thank you for submitting your task - we appreciate your effort and
-            will review it soon!
+            Thank you for submitting your Query - we appreciate your effort and
+            will contact you soon.
           </p>
         </div>
       </div>
