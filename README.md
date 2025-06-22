@@ -1,8 +1,62 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# BOXCARS
+
+This is a [Next.js](https://nextjs.org) project for automotive listings, bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+
+## Demo
+
+Watch a walkthrough: [Loom Demo Video](https://www.loom.com/share/a57107eea0974fc783322b02ccde9806)
+
+### Screenshots
+
+Application showcase  
+![Page1](../nextjs/public/readme/r1.png)
+![Page2](../nextjs/public/readme/r2.png)
+![Page3](../nextjs/public/readme/r3.png)
+![Page4](../nextjs/public/readme/r4.png)
+![Page5](../nextjs/public/readme/r5.png)
+![Page6](../nextjs/public/readme/r6.png)
+
+<!-- Add more screenshots as needed from the ./readme folder -->
+
+---
 
 ## Getting Started
 
-First, run the development server:
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/yourusername/your-repo.git
+cd your-repo
+```
+
+### 2. Install Dependencies
+
+Use any of the following based on your preference:
+
+```bash
+
+npm install
+# or
+yarn
+# or
+pnpm install
+
+
+```
+
+### 3. Create Environment Variables
+
+# Create a .env.local file in the root directory (not inside the app/ folder) and add the following:
+
+```bash
+JWT_SECRET=yourjwtsecret
+MONGODB_URI=yourmongodbconnectionurl
+
+```
+
+# Make sure to replace the values with your actual secrets.
+
+### 4. Start the Development Server.
 
 ```bash
 npm run dev
@@ -10,47 +64,21 @@ npm run dev
 yarn dev
 # or
 pnpm dev
-# or
-bun dev
+
 ```
 
-demo [https://www.loom.com/share/a57107eea0974fc783322b02ccde9806](https://www.loom.com/share/a57107eea0974fc783322b02ccde9806) see demo
+| Category  | Tech                                    |
+| --------- | --------------------------------------- |
+| Framework | [Next.js](https://nextjs.org)           |
+| Database  | [MongoDB](https://mongodb.com)          |
+| Auth      | JWT (JSON Web Tokens)                   |
+| Styling   | [Tailwind CSS](https://tailwindcss.com) |
+| Language  | TypeScript                              |
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 📚 Learn More
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📘 Next.js Documentation
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🧪 Learn Next.js
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use th# BOXCARS
-
-This is a [Next.js](https://nextjs.org) project for automotive listings, bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
-
-## Demo
-
-[Loom Demo Video](https://www.loom.com/) <!-- Replace with your actual Loom video link -->
-
-![Homepage Screenshot](./readme/homepage.png)
-![Login Screenshot](./readme/login.png)
-<!-- Add more images as needed -->
-
-## Getting Started
-
-### 1. Clone the repository
-
-```bash
-git clone https://github.com/yourusername/your-repo.git
-cd your-repoe [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### 🎨 Tailwind CSS Documentation
