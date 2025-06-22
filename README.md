@@ -9,14 +9,12 @@ Watch a walkthrough: [Loom Demo Video](https://www.loom.com/share/a57107eea0974f
 ### Screenshots
 
 Application showcase  
-![Page1](../nextjs/public/readme/r1.png)
-![Page2](../nextjs/public/readme/r2.png)
-![Page3](../nextjs/public/readme/r3.png)
-![Page4](../nextjs/public/readme/r4.png)
-![Page5](../nextjs/public/readme/r5.png)
-![Page6](../nextjs/public/readme/r6.png)
-
-<!-- Add more screenshots as needed from the ./readme folder -->
+![Page1](https://github.com/user-attachments/assets/e7c3ff55-0300-4202-b811-965837aa3337)
+![Page2](https://github.com/user-attachments/assets/ef24da2c-3066-4ed5-af25-8c79ed4f4112)
+![Page3](https://github.com/user-attachments/assets/939fc51e-828c-4b01-aeb1-7e7b67651be1)
+![Page4](https://github.com/user-attachments/assets/0095a088-10d7-4ede-9da3-5415c544575d)
+![Page5](https://github.com/user-attachments/assets/50f3fe70-361e-40e1-8e59-055bae8e6947)
+![Page6](https://github.com/user-attachments/assets/5f5f4c24-492d-49cd-a588-f711185a8ef6)
 
 ---
 
